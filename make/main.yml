@@ -1,0 +1,10 @@
+---
+
+-   name: make
+    make:
+        chdir: /usr/local/src/varnish-modules
+
+-   name: make install
+    make:
+        chdir: /usr/local/src/varnish-modules
+        target: install

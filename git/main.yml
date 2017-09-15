@@ -1,0 +1,7 @@
+---
+
+-   name: git clone varnish-modules
+    git:
+        repo: https://github.com/varnish/varnish-modules.git
+        dest: /usr/local/src/varnish-modules/
+        clone: true

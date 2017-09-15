@@ -1,0 +1,14 @@
+---
+
+-   name: get file status
+    stat:
+        path: /tmp/file
+    register: file_status
+
+-   name: use file status
+    debug: msg="File exists!!"
+    when: file_status.stat.exists == True
+
+-   name: use file status
+    debug: msg="File does not exist!!"
+    when: file_status.stat.exists == False

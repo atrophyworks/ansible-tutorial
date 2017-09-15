@@ -1,0 +1,6 @@
+---
+
+-   name: configure
+    shell: ./configure
+    args:
+        chdir: /usr/local/src/varnish-modules

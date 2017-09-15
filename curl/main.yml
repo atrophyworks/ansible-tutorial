@@ -1,0 +1,8 @@
+---
+
+-   name: download varnish repo
+    get_url:
+        url: https://packagecloud.io/install/repositories/varnishcache/varnish51/script.rpm.sh
+        dest: /tmp/varnish_repo_installer.sh
+        force: yes
+        mode: 0755

@@ -1,0 +1,26 @@
+---
+
+-   name: install gcc
+    yum:
+        name: gcc
+        state: present
+
+-   name: remove gcc
+    yum:
+        name: gcc
+        state: absent
+
+-   name: install multiple packages
+    yum:
+        name: "{{ item }}"
+        state: present
+    with_items:
+        - gcc
+        - jemalloc
+
+-   name: use specified repository
+    yum:
+       name: varnish
+       state: present
+       disablerepo: amzn-main,amzn-updates
+       enablerepo: varnishcache_varnish51

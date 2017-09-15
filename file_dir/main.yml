@@ -1,0 +1,16 @@
+---
+
+-   name: create file
+    file:
+        path: /tmp/touch_file
+        state: touch
+
+-   name: create directory
+    file:
+        state: directory
+        path: /usr/local/src/varnish-modules
+
+-   name: remove directory or file
+    file:
+        state: absent
+        path: /usr/local/src/varnish-modules
