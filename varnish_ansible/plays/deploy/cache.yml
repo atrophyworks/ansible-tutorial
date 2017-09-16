@@ -1,0 +1,9 @@
+---
+
+-   hosts: cache
+    gather_facts: false
+    become: true
+    roles:
+        - role: varnish
+    vars:
+        exec_remove: false

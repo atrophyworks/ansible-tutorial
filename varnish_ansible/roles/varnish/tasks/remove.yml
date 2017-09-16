@@ -1,0 +1,21 @@
+---
+
+-   name: remove ~ remove varnish
+    yum:
+        name: "{{ item }}"
+        state: absent
+    with_items:
+        - varnish
+        - varnish-devel
+
+- name: remove ~ find varnish repo list
+  find:
+    paths: /etc/yum.repos.d/
+    patterns: "varnish*.repo"
+  register: find_results
+
+- name: remove ~ remove varnish repo
+  file:
+    path: "{{ item['path'] }}"
+    state: absent
+  with_items: "{{ find_results['files'] }}"

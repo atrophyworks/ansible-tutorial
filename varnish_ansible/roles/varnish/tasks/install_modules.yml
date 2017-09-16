@@ -1,0 +1,35 @@
+---
+-   name: create work directory
+    file:
+        state: directory
+        path: /usr/local/src/varnish-modules
+
+-   name: install modules
+    git:
+        repo: https://github.com/varnish/varnish-modules.git
+        dest: /usr/local/src/varnish-modules/
+        clone: true
+
+-   name: bootstrap
+    shell: ./bootstrap
+    args:
+        chdir: /usr/local/src/varnish-modules
+
+-   name: configure
+    shell: ./configure
+    args:
+        chdir: /usr/local/src/varnish-modules
+
+-   name: make
+    make:
+        chdir: /usr/local/src/varnish-modules
+
+-   name: make install
+    make:
+        chdir: /usr/local/src/varnish-modules
+        target: install
+
+-   name: remove module src
+    file:
+        state: absent
+        path: /usr/local/src/varnish-modules

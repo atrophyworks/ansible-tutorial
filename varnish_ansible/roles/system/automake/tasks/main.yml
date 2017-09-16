@@ -1,0 +1,6 @@
+---
+
+-   name: install automake
+    yum:
+        name: automake
+        state: present

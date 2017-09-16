@@ -1,0 +1,38 @@
+---
+
+-   name:  check if varnish is installed
+    stat:
+        path: /usr/sbin/varnishd
+    register: check_varnishd
+
+-   name: get varnish detail
+    shell: varnishd -V
+    register: varnish_detail
+    when: check_varnishd.stat.exists
+
+-   name: set execute remove
+    set_fact:
+        exec_remove: "{{ varnish.version not in varnish_detail.stderr.split('\n')[0] }}"
+    when: check_varnishd.stat.exists
+
+-   name: remove ~ remove varnish
+    include: remove.yml
+    when: exec_remove
+
+-   name: check if varnish is installed
+    stat:
+        path: /usr/sbin/varnishd
+    register: stat_varnishd
+
+-   name: include ~ install varnish
+    include: install.yml
+    when: not stat_varnishd.stat.exists
+
+-   name: check xkey module
+    stat:
+        path: /usr/lib64/varnish/vmods/libvmod_xkey.so
+    register: stat_xkey
+
+-   name: include ~ install modules
+    include: install_modules.yml
+    when: not stat_xkey.stat.exists

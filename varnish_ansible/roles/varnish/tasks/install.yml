@@ -1,0 +1,40 @@
+---
+
+-   name: install ~ install gcc
+    yum:
+        name: gcc
+        state: present
+
+-   name: install ~ install jemalloc
+    yum:
+        name: jemalloc
+        state: present
+
+-   name: check varnish repo
+    stat:
+        path: "/etc/yum.repos.d/{{ varnish.repo }}.repo"
+    register: stat_repo_result
+
+-   name: install ~ download varnish repository
+    get_url:
+        url: "{{ varnish.curl_url }}"
+        dest: /tmp/varnish_installer.sh
+        force: yes
+        mode: 0755
+    when: stat_repo_result.stat.exists == False
+
+-   name: install ~ execute varnish_installer script
+    shell: ./varnish_installer.sh
+    args:
+        chdir: /tmp/
+    when: stat_repo_result.stat.exists == False
+
+-   name: install ~ install varnish
+    yum:
+        name: "{{ item }}"
+        state: present
+        disablerepo: amzn-main,amzn-updates
+        enablerepo: "{{ varnish.repo }}"
+    with_items:
+        - varnish
+        - varnish-devel

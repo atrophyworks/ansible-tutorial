@@ -1,0 +1,6 @@
+---
+
+-   name: install libtool
+    yum:
+        name: libtool
+        state: present
