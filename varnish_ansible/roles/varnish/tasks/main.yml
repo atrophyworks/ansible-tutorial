@@ -15,7 +15,7 @@
         exec_remove: "{{ varnish.version not in varnish_detail.stderr.split('\n')[0] }}"
     when: check_varnishd.stat.exists
 
--   name: remove ~ remove varnish
+-   name: include ~ remove varnish
     include: remove.yml
     when: exec_remove
 
