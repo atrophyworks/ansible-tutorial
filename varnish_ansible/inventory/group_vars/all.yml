@@ -1,4 +1,4 @@
 varnish:
     curl_url: https://packagecloud.io/install/repositories/varnishcache/varnish5/script.rpm.sh
     repo: varnishcache_varnish5
-    version: "5.3"
+    version: "5.2"
